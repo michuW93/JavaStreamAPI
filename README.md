@@ -1,0 +1,2 @@
+# JavaStreamAPI
+playing with streams
