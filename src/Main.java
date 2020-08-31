@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args){
         List<King> kingsOfPoland = getKings();
 
-        getFemaleKingsImperative(kingsOfPoland);  //65192700
-        getFemaleKingsDeclarative(kingsOfPoland); //12944700
+        getFemaleKingsImperative(kingsOfPoland);  //65192700  69766900
+        getFemaleKingsDeclarative(kingsOfPoland); //12944700  14753300
 
     }
 
@@ -27,8 +27,7 @@ public class Main {
 
     private static void getFemaleKingsDeclarative(List<King> kingsOfPoland) {
         long start = System.nanoTime();
-        List<King> females = new ArrayList<>();
-        females = kingsOfPoland.stream()
+        List<King> females = kingsOfPoland.stream()
                 .filter(king -> king.getGender().equals(Gender.FEMALE))
                 .collect(Collectors.toList());
         females.forEach(System.out::println);
