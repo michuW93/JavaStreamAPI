@@ -4,19 +4,45 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         List<King> kingsOfPoland = getKings();
 
         getFemaleKingsImperative(kingsOfPoland);  //65192700  69766900
         getFemaleKingsDeclarative(kingsOfPoland); //12944700  14753300
 
+        System.out.println();
+
+        areAllKingsOlderThan20Imperative(kingsOfPoland);  //31500    3042500
+        areAllKingsOlderThan20Declarative(kingsOfPoland); //1997300  66420200
+    }
+
+    private static void areAllKingsOlderThan20Imperative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        boolean areAllOlderThan20 = true;
+        for (King king : kingsOfPoland) {
+            if(king.getAge() <= 20){
+                areAllOlderThan20 = false;
+            }
+        }
+        System.out.println(areAllOlderThan20);
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time areAllKingsOlderThan20Imperative: " + elapsedTime);
+    }
+
+    private static void areAllKingsOlderThan20Declarative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        boolean areAllOlderThan20 = kingsOfPoland.stream()
+                .allMatch(king -> king.getAge() > 20);
+        System.out.println(areAllOlderThan20);
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time areAllKingsOlderThan20Declarative: " + elapsedTime);
     }
 
     private static void getFemaleKingsImperative(List<King> kingsOfPoland) {
         long start = System.nanoTime();
         List<King> females = new ArrayList<>();
-        for (King king : kingsOfPoland){
-            if(king.getGender().equals(Gender.FEMALE)){
+        for (King king : kingsOfPoland) {
+            if (king.getGender().equals(Gender.FEMALE)) {
                 females.add(king);
             }
         }
