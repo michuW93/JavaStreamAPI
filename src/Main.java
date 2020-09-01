@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,13 +20,40 @@ public class Main {
 
         anyKingOlderThan80Imperative(kingsOfPoland);   //22100   88300    25100
         anyKingOlderThan80Declarative(kingsOfPoland);  //386500  1278700  364500
+
+        System.out.println();
+
+        kingWithMaxAgeImperative(kingsOfPoland);    //38600       613100
+        kingWithMaxAgeDeclarative(kingsOfPoland);   //36106800    37230400
+    }
+
+    private static void kingWithMaxAgeImperative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        King maxAgeKing = kingsOfPoland.get(0);
+        for (King king : kingsOfPoland) {
+            if (king.getAge() > maxAgeKing.getAge()) {
+                maxAgeKing = king;
+            }
+        }
+        System.out.println(maxAgeKing);
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time anyKingOlderThan80Imperative: " + elapsedTime);
+    }
+
+    private static void kingWithMaxAgeDeclarative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        kingsOfPoland.stream()
+                .max(Comparator.comparing(King::getAge))
+                .ifPresent(king -> System.out.println(king));
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time kingWithMaxAgeDeclarative: " + elapsedTime);
     }
 
     private static void anyKingOlderThan80Imperative(List<King> kingsOfPoland) {
         long start = System.nanoTime();
         boolean isAnyKingOlderThan80 = false;
-        for (King king : kingsOfPoland){
-            if(king.getAge() > 80){
+        for (King king : kingsOfPoland) {
+            if (king.getAge() > 80) {
                 isAnyKingOlderThan80 = true;
                 break;
             }
@@ -48,7 +76,7 @@ public class Main {
         long start = System.nanoTime();
         boolean areAllOlderThan20 = true;
         for (King king : kingsOfPoland) {
-            if(king.getAge() <= 20){
+            if (king.getAge() <= 20) {
                 areAllOlderThan20 = false;
             }
         }
