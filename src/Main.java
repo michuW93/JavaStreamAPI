@@ -25,6 +25,34 @@ public class Main {
 
         kingWithMaxAgeImperative(kingsOfPoland);    //38600       613100
         kingWithMaxAgeDeclarative(kingsOfPoland);   //36106800    37230400
+
+        System.out.println();
+
+        computeSumOfAllKingsAgeImperative(kingsOfPoland);    //431900   36200
+        computeSumOfAllKingsAgeDeclarative(kingsOfPoland);   //3691500  2062300
+
+    }
+
+    private static void computeSumOfAllKingsAgeImperative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        int sum = 0;
+        for (King king : kingsOfPoland) {
+            int square = king.getAge() * king.getAge();
+            sum = sum + square;
+        }
+        System.out.println(sum);
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time computeSumOfAllKingsAgeImperative: " + elapsedTime);
+    }
+
+    private static void computeSumOfAllKingsAgeDeclarative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        Integer sum = kingsOfPoland.stream()
+                .map(king -> king.getAge() * king.getAge())
+                .reduce(0, Integer::sum);
+        System.out.println(sum);
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time computeSumOfAllKingsAgeDeclarative: " + elapsedTime);
     }
 
     private static void kingWithMaxAgeImperative(List<King> kingsOfPoland) {
