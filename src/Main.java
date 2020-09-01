@@ -14,6 +14,34 @@ public class Main {
 
         areAllKingsOlderThan20Imperative(kingsOfPoland);  //31500    3042500
         areAllKingsOlderThan20Declarative(kingsOfPoland); //1997300  66420200
+
+        System.out.println();
+
+        anyKingOlderThan80Imperative(kingsOfPoland);   //22100   88300    25100
+        anyKingOlderThan80Declarative(kingsOfPoland);  //386500  1278700  364500
+    }
+
+    private static void anyKingOlderThan80Imperative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        boolean isAnyKingOlderThan80 = false;
+        for (King king : kingsOfPoland){
+            if(king.getAge() > 80){
+                isAnyKingOlderThan80 = true;
+                break;
+            }
+        }
+        System.out.println(isAnyKingOlderThan80);
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time anyKingOlderThan80Imperative: " + elapsedTime);
+    }
+
+    private static void anyKingOlderThan80Declarative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        boolean isAnyKingOlderThan80 = kingsOfPoland.stream()
+                .anyMatch(king -> king.getAge() > 80);
+        System.out.println(isAnyKingOlderThan80);
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time anyKingOlderThan80Declarative: " + elapsedTime);
     }
 
     private static void areAllKingsOlderThan20Imperative(List<King> kingsOfPoland) {
