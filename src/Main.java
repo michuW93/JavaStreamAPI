@@ -44,7 +44,7 @@ public class Main {
         long start = System.nanoTime();
         kingsOfPoland.stream()
                 .max(Comparator.comparing(King::getAge))
-                .ifPresent(king -> System.out.println(king));
+                .ifPresent(System.out::println);
         long elapsedTime = System.nanoTime() - start;
         System.out.println("Time kingWithMaxAgeDeclarative: " + elapsedTime);
     }
