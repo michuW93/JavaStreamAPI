@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -31,6 +29,36 @@ public class Main {
         computeSumOfAllKingsAgeImperative(kingsOfPoland);    //431900   36200
         computeSumOfAllKingsAgeDeclarative(kingsOfPoland);   //3691500  2062300
 
+        System.out.println();
+
+        numberOfKingsBySexImperative(kingsOfPoland);    //32501       30899
+        numberOfKingsBySexDeclarative(kingsOfPoland);   //6173500     5371200
+
+    }
+
+    private static void numberOfKingsBySexImperative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        int numOfMale = 0;
+        int numOfFemale = 0;
+        for (King king : kingsOfPoland) {
+            if (king.getGender().equals(Gender.MALE)) {
+                numOfMale++;
+            } else {
+                numOfFemale++;
+            }
+        }
+        System.out.println(numOfMale + " " + numOfFemale);
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time numberOfKingsBySexDeclarative: " + elapsedTime);
+    }
+
+    private static void numberOfKingsBySexDeclarative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        Map<Gender, Long> countByGender = kingsOfPoland.stream()
+                .collect(Collectors.groupingBy(King::getGender, Collectors.counting()));
+        System.out.println(countByGender);
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time numberOfKingsBySexDeclarative: " + elapsedTime);
     }
 
     private static void computeSumOfAllKingsAgeImperative(List<King> kingsOfPoland) {
