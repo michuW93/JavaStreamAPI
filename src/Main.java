@@ -34,6 +34,35 @@ public class Main {
         numberOfKingsBySexImperative(kingsOfPoland);    //32501       30899
         numberOfKingsBySexDeclarative(kingsOfPoland);   //6173500     5371200
 
+        System.out.println();
+
+        getNamesOfMaleKingsImperative(kingsOfPoland);  //35399     43400
+        getNameOfMaleKingsDeclarative(kingsOfPoland);  //2137801   2428900
+    }
+
+    private static void getNamesOfMaleKingsImperative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        String namesOfMaleKings = "";
+        for (King king : kingsOfPoland) {
+            if (king.getGender().equals(Gender.MALE)) {
+                namesOfMaleKings = namesOfMaleKings + king.getName() + ", ";
+            }
+        }
+        namesOfMaleKings = namesOfMaleKings.substring(0, namesOfMaleKings.length() - 1);
+        System.out.println(namesOfMaleKings);
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time getNameOfMaleKingsDeclarative: " + elapsedTime);
+    }
+
+    private static void getNameOfMaleKingsDeclarative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        String namesOfMaleKings = kingsOfPoland.stream()
+                .filter(king -> king.getGender().equals(Gender.MALE))
+                .map(King::getName)
+                .collect(Collectors.joining(", "));
+        System.out.println(namesOfMaleKings);
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time getNameOfMaleKingsDeclarative: " + elapsedTime);
     }
 
     private static void numberOfKingsBySexImperative(List<King> kingsOfPoland) {
