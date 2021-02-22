@@ -1,5 +1,6 @@
+package kings;
+
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -26,8 +27,8 @@ public class Main {
 
         System.out.println();
 
-        computeSumOfAllKingsAgeImperative(kingsOfPoland);    //431900   36200
-        computeSumOfAllKingsAgeDeclarative(kingsOfPoland);   //3691500  2062300
+        computeSumOfSquaresAllKingsAgeImperative(kingsOfPoland);    //431900   36200
+        computeSumOfSquaresAllKingsAgeDeclarative(kingsOfPoland);   //3691500  2062300
 
         System.out.println();
 
@@ -38,6 +39,16 @@ public class Main {
 
         getNamesOfMaleKingsImperative(kingsOfPoland);  //35399     43400
         getNameOfMaleKingsDeclarative(kingsOfPoland);  //2137801   2428900
+
+        System.out.println();
+
+        getKingsStartWithBImperative(kingsOfPoland);   //318500     1932800
+        getKingsStartWithBDeclarative(kingsOfPoland);  //29990400   1961900
+
+        System.out.println();
+
+        getFirstKingFromListImperative(kingsOfPoland);  //204900    357100
+        getFirstKingFromListDeclarative(kingsOfPoland); //36169000  2068200
     }
 
     private static void getNamesOfMaleKingsImperative(List<King> kingsOfPoland) {
@@ -90,7 +101,7 @@ public class Main {
         System.out.println("Time numberOfKingsBySexDeclarative: " + elapsedTime);
     }
 
-    private static void computeSumOfAllKingsAgeImperative(List<King> kingsOfPoland) {
+    private static void computeSumOfSquaresAllKingsAgeImperative(List<King> kingsOfPoland) {
         long start = System.nanoTime();
         int sum = 0;
         for (King king : kingsOfPoland) {
@@ -102,7 +113,7 @@ public class Main {
         System.out.println("Time computeSumOfAllKingsAgeImperative: " + elapsedTime);
     }
 
-    private static void computeSumOfAllKingsAgeDeclarative(List<King> kingsOfPoland) {
+    private static void computeSumOfSquaresAllKingsAgeDeclarative(List<King> kingsOfPoland) {
         long start = System.nanoTime();
         Integer sum = kingsOfPoland.stream()
                 .map(king -> king.getAge() * king.getAge())
@@ -202,9 +213,49 @@ public class Main {
         System.out.println("Time getFemaleKingsDeclarative: " + elapsedTime);
     }
 
+    private static void getKingsStartWithBImperative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        List<King> kingsOnB = new ArrayList<>();
+        for (King king : kingsOfPoland) {
+            if (king.getName().startsWith("B")) {
+                System.out.println(king.getName().toUpperCase());
+            }
+        }
+        kingsOnB.forEach(System.out::println);
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time getKingsStartWithBImperative: " + elapsedTime);
+    }
+
+    private static void getKingsStartWithBDeclarative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        kingsOfPoland.stream()
+                .filter(s -> s.getName().startsWith("B"))
+                .map(king -> king.getName().toUpperCase())
+                .forEach(System.out::println);
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time getKingsStartWithBDeclarative: " + elapsedTime);
+    }
+
+    private static void getFirstKingFromListImperative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        System.out.println(kingsOfPoland.get(0));
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time getFirstKingFromListImperative: " + elapsedTime);
+    }
+
+    private static void getFirstKingFromListDeclarative(List<King> kingsOfPoland) {
+        long start = System.nanoTime();
+        kingsOfPoland.stream()
+                .findFirst()
+                .ifPresent(System.out::println);
+        long elapsedTime = System.nanoTime() - start;
+        System.out.println("Time getFirstKingFromListDeclarative: " + elapsedTime);
+    }
+
     private static List<King> getKings() {
         return Arrays.asList(
                 new King("Bolesław I the Brave", 58, Gender.MALE),
+                new King("Bolesław II the Generous", 52, Gender.MALE),
                 new King("Bolesław III Wrymouth", 52, Gender.MALE),
                 new King("Casimir III the Great", 60, Gender.MALE),
                 new King("Jadwiga of Poland", 25, Gender.FEMALE),

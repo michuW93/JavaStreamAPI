@@ -1,3 +1,5 @@
+package kings;
+
 public class King {
     private final String name;
     private final int age;
@@ -23,7 +25,7 @@ public class King {
 
     @Override
     public String toString() {
-        return "King{" +
+        return "kings.King{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
                 ", gender=" + gender +
