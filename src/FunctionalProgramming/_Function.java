@@ -1,5 +1,6 @@
 package FunctionalProgramming;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class _Function {
@@ -15,6 +16,17 @@ public class _Function {
 
         Function<Integer, Integer> incrementBy2AndMultiplyBy20 = incrementByTwoFunction.andThen(multiplyBy20);
         System.out.println(incrementBy2AndMultiplyBy20.apply(2));
+
+        System.out.println(incrementAndMultiplyFunctional.apply(2, 100));
+
+        System.out.println(incrementAndMultiply(2, 100));
+    }
+
+    static BiFunction<Integer, Integer, Integer> incrementAndMultiplyFunctional =
+            (number, numberToMultiplyBy) -> (number + 1) * numberToMultiplyBy;
+
+    static int incrementAndMultiply(int numberToIncrement, int numberToMultiplyBy) {
+        return (numberToIncrement + 1) * numberToMultiplyBy;
     }
 
     static Function<Integer, Integer> multiplyBy20 = number -> number * 20;
