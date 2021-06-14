@@ -4,3 +4,7 @@ Playing with streams - comparing speed of imperative and declaratice programming
 java.util.Function - takes 1 argument and produces 1 result
 
 java.util.BiFunction - takes 2 arguments and produces 1 result
+
+java.util.Consumer - takes 1 argument and similar to void method
+
+java.util.BiConsumer - takes 2 arguments and similar to void method
