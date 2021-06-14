@@ -8,3 +8,5 @@ java.util.BiFunction - takes 2 arguments and produces 1 result
 java.util.Consumer - takes 1 argument and similar to void method
 
 java.util.BiConsumer - takes 2 arguments and similar to void method
+
+java.util.Predicate - take one argument and return boolean, can use many predicates eg. Predicate1.and(Predicate2).or(Predicate3).test(argument)
